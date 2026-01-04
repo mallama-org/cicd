@@ -59,7 +59,7 @@ jobs:
           
       - name: Modify values file
         run: |
-          yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/cicd/values-dev.yaml
+          yq -i '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/cicd/values-dev.yaml
           
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
