@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cicd
+  description: Python app that displays time - named cicd
+  annotations:
+    github.com/project-slug: mallama-org/cicd
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  lifecycle: experimental
