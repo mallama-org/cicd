@@ -48,12 +48,18 @@ jobs:
             sudo ln -sf /usr/bin/python3 /usr/bin/python
             sudo ln -sf /usr/bin/pip3 /usr/bin/pip
 
+      - name: Install Python tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip jq
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq
+          chmod +x yq
+          sudo mv yq /usr/local/bin/yq
+          
       - name: Modify values file
         run: |
-          echo "Updating with commit:  ${{needs.ci.outputs.commit_id}}"
-          pip install yq
           yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/cicd/values-dev.yaml
-
+          
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
